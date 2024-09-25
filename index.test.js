@@ -28,7 +28,20 @@ describe("Users test", () => {
       .post("/users")
       .send(mockData)
       .expect(200);
-      expect(response.body.name).toEqual(mockData.name)
-      expect(response.body.age).toEqual(mockData.age)
+    expect(response.body.name).toEqual(mockData.name);
+    expect(response.body.age).toEqual(mockData.age);
+  });
+  test("Put request should update user data", async () => {
+    const userId = 2;
+    const mockData = {
+      name: "pauline",
+      age: 56,
+    };
+    const response = await request(app)
+      .put(`/users/${userId}`)
+      .send(mockData)
+      .expect(200);
+    expect(response.body.name).toEqual(mockData.name);
+    expect(response.body.age).toEqual(mockData.age);
   });
 });
