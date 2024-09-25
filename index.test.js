@@ -18,4 +18,17 @@ describe("Users test", () => {
     expect(response.body.name).toEqual(findUserById.name);
     expect(response.body.age).toEqual(findUserById.age);
   });
+
+  test("Post request add new user", async () => {
+    const mockData = {
+      name: "lara",
+      age: 36,
+    };
+    const response = await request(app)
+      .post("/users")
+      .send(mockData)
+      .expect(200);
+      expect(response.body.name).toEqual(mockData.name)
+      expect(response.body.age).toEqual(mockData.age)
+  });
 });
