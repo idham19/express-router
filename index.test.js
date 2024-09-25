@@ -31,6 +31,7 @@ describe("Users test", () => {
     expect(response.body.name).toEqual(mockData.name);
     expect(response.body.age).toEqual(mockData.age);
   });
+
   test("Put request should update user data", async () => {
     const userId = 2;
     const mockData = {
@@ -43,5 +44,20 @@ describe("Users test", () => {
       .expect(200);
     expect(response.body.name).toEqual(mockData.name);
     expect(response.body.age).toEqual(mockData.age);
+  });
+
+  test("Delete request should remove a user", async () => {
+    const mockData = {
+      name: "user1",
+      age: 120,
+    };
+    const createNewUser = await request(app)
+      .post("/users")
+      .send(mockData)
+      .expect(200);
+
+    const deleteUser = await request(app)
+      .delete(`/users/${createNewUser.body.id}`)
+      .expect(200);
   });
 });
