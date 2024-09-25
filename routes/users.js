@@ -52,8 +52,8 @@ router.delete("/:id", async (req, res, next) => {
   try {
     const userId = req.params.id;
     const findUser = await User.findByPk(userId);
-    const findAllUsers = await User.findAll();
     await findUser.destroy();
+    const findAllUsers = await User.findAll();
     res.json(findAllUsers);
   } catch (error) {
     console.error(error);
